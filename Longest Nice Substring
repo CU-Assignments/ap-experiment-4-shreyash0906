@@ -1,0 +1,40 @@
+
+Code:
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+string longestNiceSubstring(string s) {
+    int n = s.length();
+    string result = "";
+    
+    for (int i = 0; i < n; ++i) {
+        for (int j = i; j < n; ++j) {
+            unordered_set<char> charSet;
+            for (int k = i; k <= j; ++k) {
+                charSet.insert(s[k]);
+            }
+            
+            bool isNice = true;
+            for (char c : charSet) {
+                if (charSet.count(tolower(c)) == 0 || charSet.count(toupper(c)) == 0) {
+                    isNice = false;
+                    break;
+                }
+            }
+            
+            if (isNice && (j - i + 1) > result.length()) {
+                result = s.substr(i, j - i + 1);
+            }
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    cout << longestNiceSubstring(s) << endl;
+    return 0;
+}
