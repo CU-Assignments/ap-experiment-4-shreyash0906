@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int hammingWeight(uint32_t n) {
+    int count = 0;
+    while (n) {
+        count += (n & 1); // Check the least significant bit
+        n >>= 1; // Right shift to process the next bit
+    }
+    return count;
+}
+
+int main() {
+    uint32_t n;
+    cin >> n;
+    cout << hammingWeight(n) << endl;
+    return 0;
+}
