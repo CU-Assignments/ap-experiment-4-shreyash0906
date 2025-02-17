@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> beautifulArray(int n) {
+        vector<int> result = {1}; // Starting with [1] for the base case
+        
+        while (result.size() < n) {
+            vector<int> temp;
+            
+            // Add odd numbers
+            for (int x : result) {
+                if (x * 2 - 1 <= n) {
+                    temp.push_back(x * 2 - 1);
+                }
+            }
+            
+            // Add even numbers
+            for (int x : result) {
+                if (x * 2 <= n) {
+                    temp.push_back(x * 2);
+                }
+            }
+            
+            result = temp; // Update the result with the new array
+        }
+        
+        return result;
+    }
+};
+
