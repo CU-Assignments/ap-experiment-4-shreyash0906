@@ -1,0 +1,27 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    const int MOD = 1337;
+
+    int powerMod(int x, int y, int mod) {
+        int result = 1;
+        x = x % mod;
+        while (y > 0) {
+            if (y % 2 == 1) result = (result * x) % mod;
+            y /= 2;
+            x = (x * x) % mod;
+        }
+        return result;
+    }
+
+    int superPow(int a, vector<int>& b) {
+        int result = 1;
+        a = a % MOD;
+        for (int digit : b) {
+            result = powerMod(result, 10, MOD) * powerMod(a, digit, MOD) % MOD;
+        }
+        return result;
+    }
+};
